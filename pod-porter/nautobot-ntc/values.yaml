@@ -43,8 +43,8 @@ environmental_variable_secrets:
   nautobot_superuser_email: "admin@example.com"
   nautobot_superuser_password: "admin"
   nautobot_superuser_api_token: "0123456789abcdef0123456789abcdef01234567"
-  nautobot_napalm_username: "changeme"
-  nautobot_napalm_password: "changeme"
+  nautobot_napalm_username: null             # Set this if you are NOT using vault to store the secrets
+  nautobot_napalm_password: null             # Set this if you are NOT using vault to store the secrets
   nautobot_hashicorp_vault_token: "changeme" # This DOES NOT SUPPORT secrets injection
   environment: [] # This section is to add environmental var secrets in Nautobot if you have none make it an empty list []
     # - name: "MY_GITHUB_TOKEN"

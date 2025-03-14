@@ -27,8 +27,10 @@ services:
       NAUTOBOT_REDIS_PORT: 6379
       NAUTOBOT_CREATE_SUPERUSER: "{{ values.config.nautobot_create_superuser }}"
       NAUTOBOT_DB_PASSWORD: "{{ values.environmental_variable_secrets.nautobot_db_password }}"
+      {% if values.environmental_variable_secrets.nautobot_napalm_username and values.environmental_variable_secrets.nautobot_napalm_password %}
       NAUTOBOT_NAPALM_USERNAME: "{{ values.environmental_variable_secrets.nautobot_napalm_username }}"
       NAUTOBOT_NAPALM_PASSWORD: "{{ values.environmental_variable_secrets.nautobot_napalm_password }}"
+      {% endif %}
       NAUTOBOT_REDIS_PASSWORD: "{{ values.environmental_variable_secrets.nautobot_redis_password }}"
       NAUTOBOT_SECRET_KEY: "012345678901234567890123456789012345678901234567890123456789"
       NAUTOBOT_SUPERUSER_NAME: "{{ values.environmental_variable_secrets.nautobot_superuser_name }}"

@@ -504,12 +504,15 @@ PLUGINS = [
 PLUGINS_CONFIG = {
     "nautobot_plugin_nornir": {
         "nornir_settings": {
-            "credentials": "nautobot_plugin_nornir.plugins.credentials.env_vars.CredentialsEnvVars"
+            "credentials": "nautobot_plugin_nornir.plugins.credentials.nautobot_secrets.CredentialsNautobotSecrets",
         },
     },
     "nautobot_secrets_providers": {
         "hashicorp_vault": {
             "url": os.environ.get("NAUTOBOT_HASHICORP_VAULT_URL"),
+            "auth_method": "token",
+            "default_mount_point": "secret",
+            "kv_version": "v2",
             "token": os.environ.get("NAUTOBOT_HASHICORP_VAULT_TOKEN"),
         }
     },
