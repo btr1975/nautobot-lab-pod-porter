@@ -1,0 +1,81 @@
+---
+# This is example values file for the template
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# One thing to note is that when using this type of secrets injection you MUST BE ON LINUX
+#
+# If defining secrets they MUST be defined in the following way
+# use_secrets:
+#   - name: "some_secret_name"
+#   - name: "some_secret_name_2"
+image:
+  nautobot:
+    repository: "localhost/nauotbot-ntc-custom"
+    tag: "latest"
+    use_secrets: [] # define the secrets that you want to use for the container
+  postgres:
+    repository: "docker.io/library/postgres"
+    tag: "13-alpine"
+  redis:
+    repository: "docker.io/library/redis"
+    tag: "6-alpine"
+  vault:
+    repository: "docker.io/library/vault"
+    tag: "1.13.3"
+
+config:
+  nautobot_db_name: "nautobot"
+  nautobot_log_level: "WARNING"
+  nautobot_banner_top: "Local"
+  nautobot_banner_bottom: null
+  nautobot_banner_login: "Welcome to Nautobot"
+  nautobot_create_superuser: "true"          # Set to "true" to create a superuser it will use the values from secrets
+  nautobot_installation_metrics_enabled: "false"
+  nautobot_cors_allow_all_origins: "true"
+  nautobot_csrf_trusted_origins: null        # This is useful if your Nautobot sits behind a Ngnix
+
+environmental_variable_secrets:
+  nautobot_redis_password: "changeme"
+  nautobot_db_user: "nautobot"
+  nautobot_db_password: "changeme"
+  nautobot_superuser_name: "admin"
+  nautobot_superuser_email: "admin@example.com"
+  nautobot_superuser_password: "admin"
+  nautobot_superuser_api_token: "0123456789abcdef0123456789abcdef01234567"
+  nautobot_napalm_username: "changeme"
+  nautobot_napalm_password: "changeme"
+  nautobot_hashicorp_vault_token: "changeme" # This DOES NOT SUPPORT secrets injection
+  environment: [] # This section is to add environmental var secrets in Nautobot if you have none make it an empty list []
+    # - name: "MY_GITHUB_TOKEN"
+    #   value: "changeme"
+    # - name: "MY_OTHER_TOKEN"
+    #   value: "/run/secrets/some_secret_name"
+
+# One thing to note is that when using this type of secrets injection you MUST BE ON LINUX
+#
+# If defining secrets they MUST be defined in the following way
+# secrets:
+#   - name: "some_secret_name"
+#   - name: "some_secret_name_2"
+#
+# Also, using secrets this way you will just give the path to the secret
+#    Example: /run/secrets/some_secret_name
+secrets: [] # define the secrets that you want to use in the environment variables
+
+service:
+  nautobot:
+    - node_port: 8080
+      container_port: 8080
+      name: "nautobot"
+  vault:
+    - node_port: 8200
+      container_port: 8200
+      name: "vault"
+
+# Set options.vault_init to true the first time you bring up the vault service, set to false after that
+# This will initialize the vault with your root token, MAKE SURE YOU SAVE THE UNSEAL TOKEN AND ROOT TOKEN
+# If you lose the root token you will have to reset the vault container, and you will lose all your data
+# it is required by vault to unseal the vault if you bring the container down, and bring it back up!
+options:
+  vault_init: true

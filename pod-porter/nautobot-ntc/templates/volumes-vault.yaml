@@ -1,0 +1,4 @@
+---
+volumes:
+  nautobot-vault-logs-{{ release.name }}: {}
+  nautobot-vault-file-{{ release.name }}: {}

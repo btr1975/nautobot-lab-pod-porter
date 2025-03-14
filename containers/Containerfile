@@ -1,0 +1,25 @@
+FROM ghcr.io/nautobot/nautobot:2.4.2-py3.12
+
+RUN pip install nautobot-bgp-models==2.3.0 \
+    nautobot-secrets-providers[all]==3.2.0 \
+    nautobot-golden-config==2.3.0 \
+    nautobot-design-builder==2.1.0 \
+    nautobot-ssot==3.5.0 \
+    nautobot-data-validation-engine==3.2.0 \
+    nautobot-firewall-models==2.2.1
+
+# Copy the configuration file into the container
+COPY configs/nautobot_config.py /opt/nautobot/nautobot_config.py
+
+USER root
+
+# Copy custom entrypoint script
+COPY entry-scripts/docker-entrypoint.sh /docker-entrypoint.sh
+
+# Copy custom secrets loader script
+COPY entry-scripts/load-secrets.sh /load-secrets.sh
+
+RUN chmod 755 /docker-entrypoint.sh \
+    && chmod 777 /load-secrets.sh
+
+USER nautobot
