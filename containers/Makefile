@@ -1,6 +1,6 @@
 # Makefile to build Nautobot container
 # Author: Benjamin P. Trachtenberg
-# Version: 2025.3.14.001
+# Version: 2025.3.18.001
 
 .PHONY: build-podman-nautobot build-docker-nautobot
 
@@ -15,4 +15,4 @@ build-podman-nautobot:
 
 build-docker-nautobot:
 	@echo "Building the nautobot container with container_version=$(container_version) in docker"
-	@docker build --tag nauotbot-ntc-custom:latest --tag nauotbot-ntc-custom:$(container_version) -f Containerfile
+	@docker build --tag nauotbot-ntc-custom:latest --tag nauotbot-ntc-custom:$(container_version) -f Containerfile .

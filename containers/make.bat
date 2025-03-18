@@ -1,7 +1,7 @@
 @ECHO OFF
 REM Make batch file to build Nautobot container
 REM Author: Benjamin P. Trachtenberg
-REM Version: 2025.3.14.001
+REM Version: 2025.3.18.001
 REM
 
 SET option=%1
@@ -23,7 +23,7 @@ IF "%option%" == "build-podman-nautobot" (
 
 IF "%option%" == "build-docker-nautobot" (
     @ECHO "Building the nautobot container with container_version=%container_version% in docker"
-    docker build --tag nauotbot-ntc-custom:latest --tag nauotbot-ntc-custom:%container_version% -f Containerfile
+    docker build --tag nauotbot-ntc-custom:latest --tag nauotbot-ntc-custom:%container_version% -f Containerfile .
     GOTO END
 )
 
