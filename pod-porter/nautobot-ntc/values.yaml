@@ -77,5 +77,8 @@ service:
 # This will initialize the vault with your root token, MAKE SURE YOU SAVE THE UNSEAL TOKEN AND ROOT TOKEN
 # If you lose the root token you will have to reset the vault container, and you will lose all your data
 # it is required by vault to unseal the vault if you bring the container down, and bring it back up!
+#
+# Depending on your system you may need to disable mlock, if you are running on a system that does not support mlock
 options:
   vault_init: true
+  vault_mlock: true

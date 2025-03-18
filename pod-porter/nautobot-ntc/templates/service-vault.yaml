@@ -18,7 +18,11 @@ services:
       VAULT_DEV_ROOT_TOKEN_ID: "{{ values.environmental_variable_secrets.nautobot_hashicorp_vault_token }}"
       VAULT_LOCAL_CONFIG: '{"storage": {"file": {"path": "/vault/file"}}, "default_lease_ttl": "168h", "max_lease_ttl": "720h", "ui": true, "cluster_addr": "http://0.0.0.0:8201", "api_addr": "http://0.0.0.0:8200"}'
     {% else %}
+    {% if values.options.vault_mlock %}
       VAULT_LOCAL_CONFIG: '{"storage": {"file": {"path": "/vault/file"}}, "listener": [{"tcp": { "address": "0.0.0.0:8200", "tls_disable": true}}], "default_lease_ttl": "168h", "max_lease_ttl": "720h", "ui": true, "cluster_addr": "http://0.0.0.0:8201", "api_addr": "http://0.0.0.0:8200"}'
+    {% else %}
+      VAULT_LOCAL_CONFIG: '{"storage": {"file": {"path": "/vault/file"}}, "listener": [{"tcp": { "address": "0.0.0.0:8200", "tls_disable": true}}], "default_lease_ttl": "168h", "max_lease_ttl": "720h", "ui": true, "cluster_addr": "http://0.0.0.0:8201", "api_addr": "http://0.0.0.0:8200", "disable_mlock": true}'
+    {% endif %}
     {% endif %}
     volumes:
       - "nautobot-vault-logs-{{ release.name }}:/vault/logs"
