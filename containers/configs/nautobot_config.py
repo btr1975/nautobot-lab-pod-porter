@@ -496,6 +496,9 @@ PLUGINS = [
     "nautobot_ssot",
     "nautobot_data_validation_engine",
     "nautobot_firewall_models",
+    "nautobot_device_lifecycle_mgmt",
+    "nautobot_device_onboarding",
+    "nautobot_plugin_nornir",
 ]
 
 # Plugins configuration settings. These settings are used by various plugins that the user may have installed.
@@ -506,15 +509,31 @@ PLUGINS_CONFIG = {
         "nornir_settings": {
             "credentials": "nautobot_plugin_nornir.plugins.credentials.nautobot_secrets.CredentialsNautobotSecrets",
         },
+        "runner": {
+            "plugin": "threaded",
+            "options": {
+                "num_workers": 20,
+            },
+        },
     },
     "nautobot_secrets_providers": {
         "hashicorp_vault": {
-            "url": os.environ.get("NAUTOBOT_HASHICORP_VAULT_URL"),
-            "auth_method": "token",
-            "default_mount_point": "secret",
-            "kv_version": "v2",
-            "token": os.environ.get("NAUTOBOT_HASHICORP_VAULT_TOKEN"),
-        }
+            "vaults": {
+                "default": {
+                    "url": os.environ.get("NAUTOBOT_HASHICORP_VAULT_URL"),
+                    "auth_method": "token",
+                    "default_mount_point": "secret",
+                    "kv_version": "v2",
+                    "token": os.environ.get("NAUTOBOT_HASHICORP_VAULT_TOKEN"),
+                },
+            },
+        },
+    },
+    "nautobot_device_lifecycle_mgmt": {
+        "barchart_bar_width": float(0.15),
+        "barchart_width": int(12),
+        "barchart_height": int(5),
+        "enabled_metrics": [],
     },
 }
 

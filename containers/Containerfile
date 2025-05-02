@@ -1,12 +1,15 @@
-FROM ghcr.io/nautobot/nautobot:2.4.2-py3.12
+FROM ghcr.io/nautobot/nautobot:2.4.7-py3.12
 
-RUN pip install nautobot-bgp-models==2.3.0 \
+RUN pip install nautobot-bgp-models==2.3.1 \
     nautobot-secrets-providers[all]==3.2.0 \
-    nautobot-golden-config==2.3.0 \
-    nautobot-design-builder==2.1.0 \
-    nautobot-ssot==3.5.0 \
+    nautobot-golden-config==2.4.0 \
+    nautobot-design-builder==2.2.0 \
+    nautobot-ssot==3.6.0 \
     nautobot-data-validation-engine==3.2.0 \
-    nautobot-firewall-models==2.2.1
+    nautobot-firewall-models==2.2.1 \
+    nautobot-device-lifecycle-mgmt==3.0.1 \
+    nautobot-device-onboarding==4.2.4 \
+    nautobot-plugin-nornir==2.2.1
 
 # Copy the configuration file into the container
 COPY configs/nautobot_config.py /opt/nautobot/nautobot_config.py
