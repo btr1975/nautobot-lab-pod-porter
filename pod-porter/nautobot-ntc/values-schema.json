@@ -1,0 +1,348 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "values",
+    "description": "Values schema for nautobot-lab porter",
+    "minCompatiblePorter": "2.0.1",
+    "type": "object",
+    "properties": {
+        "image": {
+            "type": "object",
+            "description": "nautobot-lab images",
+            "properties": {
+                "nautobot": {
+                    "type": "object",
+                    "description": "nautobot image",
+                    "$ref": "#/$defs/image",
+                    "use_secrets": {
+                        "type": "array",
+                        "minItems": 0,
+                        "description": "nautobot-lab image secrets",
+                        "#ref": "#/$defs/string_no_spaces"
+                    }
+                },
+                "postgres": {
+                    "type": "object",
+                    "description": "postgres image",
+                    "$ref": "#/$defs/image"
+                },
+                "redis": {
+                    "type": "object",
+                    "description": "redis image",
+                    "$ref": "#/$defs/image"
+                },
+                "vault": {
+                    "type": "object",
+                    "description": "vault image",
+                    "$ref": "#/$defs/image"
+                }
+            },
+            "required": [
+                "nautobot",
+                "postgres",
+                "redis",
+                "vault"
+            ]
+        },
+        "config": {
+            "type": "object",
+            "description": "nautobot-lab config",
+            "properties": {
+                "nautobot_db_name": {
+                    "description": "nautobot db name",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_log_level": {
+                    "description": "nautobot log level",
+                    "$ref": "#/$defs/log_levels"
+                },
+                "nautobot_banner_top": {
+                    "description": "nautobot banner top",
+                    "$ref": "#/$defs/string_no_spaces_begin_or_end"
+                },
+                "nautobot_banner_bottom": {
+                    "description": "nautobot banner bottom",
+                    "anyOf": [
+                        {
+                            "description": "banner bottom",
+                            "$ref": "#/$defs/string_no_spaces_begin_or_end"
+                        },
+                        {
+                            "type": "null",
+                            "description": "no banner bottom"
+                        }
+                    ]
+                },
+                "nautobot_banner_login": {
+                    "description": "nautobot banner login",
+                    "$ref": "#/$defs/string_no_spaces_begin_or_end"
+                },
+                "nautobot_create_superuser": {
+                    "description": "create superuser",
+                    "$ref": "#/$defs/literal_true_false"
+                },
+                "nautobot_installation_metrics_enabled": {
+                    "description": "nautobot installation metrics enabled",
+                    "$ref": "#/$defs/literal_true_false"
+                },
+                "nautobot_cors_allow_all_origins": {
+                    "description": "nautobot cors allow all origins",
+                    "$ref": "#/$defs/literal_true_false"
+                },
+                "nautobot_csrf_trusted_origins": {
+                    "description": "nautobot csrf trusted origins",
+                    "anyOf": [
+                        {
+                            "description": "trusted origins",
+                            "$ref": "#/$defs/string_no_spaces"
+                        },
+                        {
+                            "type": "null",
+                            "description": "no trusted origins"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "nautobot_db_name",
+                "nautobot_log_level",
+                "nautobot_banner_top",
+                "nautobot_banner_bottom",
+                "nautobot_banner_login",
+                "nautobot_create_superuser",
+                "nautobot_installation_metrics_enabled",
+                "nautobot_cors_allow_all_origins",
+                "nautobot_csrf_trusted_origins"
+            ]
+        },
+        "environmental_variable_secrets": {
+            "type": "object",
+            "description": "nautobot-lab env var secrets",
+            "properties": {
+                "nautobot_redis_password": {
+                    "description": "REDIS password",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_db_user": {
+                    "description": "Database user",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_db_password": {
+                    "description": "Database password",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_superuser_name": {
+                    "description": "Superuser name",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_superuser_email": {
+                    "description": "Superuser email",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_superuser_password": {
+                    "description": "Superuser password",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_superuser_api_token": {
+                    "description": "Superuser API token",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "nautobot_napalm_username": {
+                    "description": "NAPALM username",
+                    "anyOf": [
+                        {
+                            "description": "trusted origins",
+                            "$ref": "#/$defs/string_no_spaces"
+                        },
+                        {
+                            "type": "null",
+                            "description": "no trusted origins"
+                        }
+                    ]
+                },
+                "nautobot_napalm_password": {
+                    "description": "NAPALM password",
+                    "anyOf": [
+                        {
+                            "description": "trusted origins",
+                            "$ref": "#/$defs/string_no_spaces"
+                        },
+                        {
+                            "type": "null",
+                            "description": "no trusted origins"
+                        }
+                    ]
+                },
+                "nautobot_hashicorp_vault_token": {
+                    "description": "HashiCorp vault token",
+                    "$ref": "#/$defs/string_no_spaces"
+                },
+                "environment": {
+                    "type": "array",
+                    "minItems": 0,
+                    "description": "nautobot-lab image secrets",
+                    "items": {
+                        "$ref": "#/$defs/adhoc_environmental_variable"
+                    }
+                }
+            },
+            "required": [
+                "nautobot_redis_password",
+                "nautobot_db_user",
+                "nautobot_db_password",
+                "nautobot_superuser_name",
+                "nautobot_superuser_email",
+                "nautobot_superuser_password",
+                "nautobot_superuser_api_token",
+                "nautobot_napalm_username",
+                "nautobot_napalm_password",
+                "nautobot_hashicorp_vault_token"
+            ]
+        },
+        "secrets": {
+            "type": "array",
+            "minItems": 0,
+            "description": "nautobot-lab secrets",
+            "#ref": "#/$defs/string_no_spaces"
+        },
+        "service": {
+            "type": "object",
+            "description": "nautobot lab services",
+            "properties": {
+                "nautobot": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "items": {
+                        "$ref": "#/$defs/service"
+                    }
+                },
+                "vault": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "items": {
+                        "$ref": "#/$defs/service"
+                    }
+                }
+            },
+            "required": [
+                "nautobot",
+                "vault"
+            ]
+        },
+        "options": {
+            "type": "object",
+            "description": "nautobot-lab options",
+            "properties": {
+                "vault_init": {
+                    "type": "boolean",
+                    "description": "Initialize vault"
+                },
+                "vault_mlock": {
+                    "type": "boolean",
+                    "description": "Enable vault mlock"
+                }
+            }
+        }
+    },
+    "required": [
+        "image",
+        "config",
+        "environmental_variable_secrets",
+        "secrets",
+        "service",
+        "options"
+    ],
+    "$defs": {
+        "image": {
+            "type": "object",
+            "properties": {
+                "repository": {
+                    "$ref": "#/$defs/string_no_spaces",
+                    "description": "The image repository"
+                },
+                "tag": {
+                    "$ref": "#/$defs/string_no_spaces",
+                    "description": "The image tag"
+                }
+            },
+            "required": [
+                "repository",
+                "tag"
+            ]
+        },
+        "adhoc_environmental_variable": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "$ref": "#/$defs/string_no_spaces",
+                    "description": "The variable name"
+                },
+                "value": {
+                    "$ref": "#/$defs/string_no_spaces_begin_or_end",
+                    "description": "The variable value"
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        },
+        "service": {
+            "type": "object",
+            "description": "Service",
+            "properties": {
+                "node_port": {
+                    "type": "integer",
+                    "description": "The node port of the service",
+                    "minimum": 1,
+                    "maximum": 65535
+                },
+                "container_port": {
+                    "type": "integer",
+                    "description": "The container port of the service",
+                    "minimum": 1,
+                    "maximum": 65535
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The name of the service"
+                }
+            },
+            "required": [
+                "node_port",
+                "container_port",
+                "name"
+            ]
+        },
+        "string_no_spaces": {
+            "type": "string",
+            "description": "A string without spaces",
+            "pattern": "^\\S+$"
+        },
+        "string_no_spaces_begin_or_end": {
+            "type": "string",
+            "description": "A string without spaces",
+            "pattern": "^\\S.*\\S$"
+        },
+        "literal_true_false": {
+            "type": "string",
+            "description": "A string that is either true or false",
+            "enum": [
+                "true",
+                "false"
+            ]
+        },
+        "log_levels": {
+            "type": "string",
+            "description": "A string that is one of the log levels",
+            "enum": [
+                "DEBUG",
+                "INFO",
+                "WARNING",
+                "ERROR",
+                "CRITICAL"
+            ]
+        }
+    }
+}
