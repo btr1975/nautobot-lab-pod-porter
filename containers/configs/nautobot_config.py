@@ -535,6 +535,26 @@ PLUGINS_CONFIG = {
         "barchart_height": int(5),
         "enabled_metrics": [],
     },
+    "nautobot_golden_config": {
+        "per_feature_bar_width": float(0.15),
+        "per_feature_width": int(13),
+        "per_feature_height": int(4),
+        "enable_backup": True,
+        "enable_compliance": True,
+        "enable_intended": True,
+        "enable_sotagg": True,
+        "enable_plan": True,
+        "enable_deploy": True,
+        "enable_postprocessing": True,
+        "sot_agg_transposer": None,
+        "postprocessing_callables": [],
+        "postprocessing_subscribed": [],
+        "jinja_env": {
+            "undefined": "jinja2.StrictUndefined",
+            "trim_blocks": True,
+            "lstrip_blocks": False,
+        }
+    },
 }
 
 # Prefer IPv6 addresses or IPv4 addresses in selecting a device's primary IP address? Default False
