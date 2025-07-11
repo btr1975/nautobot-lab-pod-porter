@@ -1,5 +1,5 @@
 ARG PYTHON_VERSION=3.12
-ARG NAUTBOT_VERSION=2.4.8
+ARG NAUTBOT_VERSION=2.4.11
 
 FROM ghcr.io/nautobot/nautobot:${NAUTBOT_VERSION}-py${PYTHON_VERSION}
 
@@ -7,10 +7,10 @@ RUN pip install nautobot-bgp-models==2.3.1 \
     nautobot-secrets-providers[all]==3.2.0 \
     nautobot-golden-config==2.4.1 \
     nautobot-design-builder==2.2.0 \
-    nautobot-ssot==3.8.1 \
+    nautobot-ssot==3.9.1 \
     nautobot-data-validation-engine==3.2.0 \
     nautobot-firewall-models==2.2.2 \
-    nautobot-device-lifecycle-mgmt==3.0.1 \
+    nautobot-device-lifecycle-mgmt==3.1.1 \
     nautobot-device-onboarding==4.2.5 \
     nautobot-plugin-nornir==2.2.1
 
