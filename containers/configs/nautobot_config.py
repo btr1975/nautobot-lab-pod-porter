@@ -499,6 +499,7 @@ PLUGINS = [
     "nautobot_device_lifecycle_mgmt",
     "nautobot_device_onboarding",
     "nautobot_plugin_nornir",
+    "welcome_wizard",
 ]
 
 # Plugins configuration settings. These settings are used by various plugins that the user may have installed.
@@ -554,6 +555,10 @@ PLUGINS_CONFIG = {
             "trim_blocks": True,
             "lstrip_blocks": False,
         }
+    },
+    "welcome_wizard": {
+        "enable_devicetype-library": True,
+        "enable_welcome_banner": False,
     },
 }
 
