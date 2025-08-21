@@ -499,6 +499,7 @@ PLUGINS = [
     "nautobot_device_lifecycle_mgmt",
     "nautobot_device_onboarding",
     "nautobot_plugin_nornir",
+    "nautobot_dns_models",
     "welcome_wizard",
 ]
 
