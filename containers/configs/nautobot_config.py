@@ -494,7 +494,6 @@ PLUGINS = [
     "nautobot_golden_config",
     "nautobot_design_builder",
     "nautobot_ssot",
-    "nautobot_data_validation_engine",
     "nautobot_firewall_models",
     "nautobot_device_lifecycle_mgmt",
     "nautobot_device_onboarding",
