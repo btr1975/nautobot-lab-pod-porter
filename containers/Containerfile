@@ -1,18 +1,18 @@
 ARG PYTHON_VERSION=3.12
-ARG NAUTBOT_VERSION=3.0.0
+ARG NAUTBOT_VERSION=3.0.11
 
 FROM ghcr.io/nautobot/nautobot:${NAUTBOT_VERSION}-py${PYTHON_VERSION}
 
-RUN pip install nautobot-bgp-models==3.0.0 \
-    nautobot-secrets-providers[all]==4.0.0 \
-    nautobot-golden-config==3.0.0 \
-    nautobot-design-builder==3.0.0 \
-    nautobot-ssot==4.0.0 \
+RUN pip install nautobot-bgp-models==3.1.1 \
+    nautobot-secrets-providers[all]==4.0.1 \
+    nautobot-golden-config==3.0.6 \
+    nautobot-design-builder==3.1.0 \
+    nautobot-ssot==4.2.2 \
     nautobot-firewall-models==3.0.0 \
-    nautobot-device-lifecycle-mgmt==4.0.0 \
-    nautobot-device-onboarding==5.0.0 \
-    nautobot-plugin-nornir==3.0.0 \
-    nautobot-dns-models==2.0.0 \
+    nautobot-device-lifecycle-mgmt==4.1.1 \
+    nautobot-device-onboarding==5.3.0 \
+    nautobot-plugin-nornir==3.2.1 \
+    nautobot-dns-models==2.1.1 \
     nautobot-welcome-wizard==3.0.0
 
 # Copy the configuration file into the container
